@@ -82,8 +82,8 @@
     tooltip.style.padding = "14px";
     tooltip.style.borderRadius = "8px";
     tooltip.style.border = "1px solid #333";
-    tooltip.style.fontSize = "16px";  // was 14px
-    tooltip.style.fontWeight = "650";
+    tooltip.style.fontSize = "15px";  // was 14px
+    tooltip.style.fontWeight = "600";
     tooltip.style.pointerEvents = "none";
     tooltip.style.display = "none";
     tooltip.style.maxWidth = "275px";
@@ -96,6 +96,7 @@
     filtered.forEach((item) => {
       // Create the "Wrapper" Div
       const containerDiv = document.createElement("div");
+
 
       // --- DYNAMIC MARGIN ---
       // We use the population value and multiply it to make the visual difference obvious
@@ -136,11 +137,31 @@
         containerDiv.style.transform = "translateX(70px)";
       });
       containerDiv.addEventListener("click", (e) => {
-        tooltip.textContent = item.growth;
+        tooltip.innerHTML = "";  // clear previous content
+
+        const countryHeader = document.createElement("div");
+        countryHeader.textContent = item.country;
+        countryHeader.style.fontWeight = "900";
+        countryHeader.style.textAlign = "center";
+        countryHeader.style.marginBottom = "6px";
+        countryHeader.style.fontSize = "20px";  // slightly bigger than the growth text
+
+        const growthText = document.createElement("div");
+        growthText.textContent = item.growth;
+
+        tooltip.appendChild(countryHeader);
+        tooltip.appendChild(growthText);
         tooltip.style.display = "block";
         tooltip.style.left = e.clientX + 10 + "px";
-        tooltip.style.top = e.clientY - 30 + "px";
+        tooltip.style.top = e.clientY - 80 + "px";
       });
+
+      // containerDiv.addEventListener("click", (e) => {
+      //   tooltip.textContent = item.growth;
+      //   tooltip.style.display = "block";
+      //   tooltip.style.left = e.clientX + 10 + "px";
+      //   tooltip.style.top = e.clientY - 30 + "px";
+      // });
 
       containerDiv.addEventListener("mouseout", () => {
         containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
