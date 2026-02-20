@@ -12,21 +12,37 @@
 
 <body>
   <div id="chart"></div>
-  <h1 id="holder" style="text-align: center; width: 750px;">Countries by population</h1>
+  <h1 id="holder" style="text-align: center; width: 850px;">Countries by population</h1>
   <br>
   <script>
 
     const data = [
-      { country: "France", population: 67 },
-      { country: "Germany", population: 83 },
-      { country: "Spain", population: 47 },
-      { country: "UK", population: 69 },
-      { country: "Italy", population: 59 },
-      { country: "Poland", population: 38 },
-      { country: "Romania", population: 19 },
-      { country: "Netherlands", population: 17 },
-      { country: "Belgium", population: 11 },
-      { country: "Greece", population: 10 }
+      {
+        country: "Germany",
+        population: 84,
+        growth: "Grew from 81M to 84M (2014-2024), driven almost entirely by immigration. Without migrants, population would be shrinking due to more deaths than births each year."
+      },
+      {
+        country: "UK",
+        population: 68,
+        growth: "Grew from 64M to 68M (2014-2024). Net migration hit record highs post-Brexit. Birth rate has fallen to its lowest level since records began."
+      },
+      {
+        country: "France",
+        population: 68,
+        growth: "Grew modestly from 66M to 68M (2014-2024). Has one of Europe's highest birth rates but it has been declining. Migration now the main growth driver."
+      },
+      {
+        country: "Italy",
+        population: 59,
+        growth: "Actually shrinking — peaked at 60.3M in 2014 and has fallen to 59M by 2024. One of Europe's lowest birth rates (6.7 births per 1000 people) and an ageing population."
+      },
+      { country: "Spain", population: 47, growth: "some info" },
+      { country: "Poland", population: 38, growth: "some info" },
+      { country: "Romania", population: 19, growth: "some info" },
+      { country: "Netherlands", population: 17, growth: "some info" },
+      { country: "Belgium", population: 11, growth: "some info" },
+      { country: "Greece", population: 10, growth: "some info" }
     ];
 
 
@@ -57,6 +73,23 @@
 
     // 1. Filter the data (e.g., population over 50)
     const filtered = extrabig
+
+    const tooltip = document.createElement("div");
+    tooltip.style.position = "fixed";
+    tooltip.style.backgroundColor = "rgba(180, 130, 124, 1.45)";
+    tooltip.style.color = "#333";
+    tooltip.style.padding = "8px 12px";
+    tooltip.style.borderRadius = "6px";
+    tooltip.style.border = "1px solid #333";
+    tooltip.style.fontSize = "16px";  // was 14px
+    tooltip.style.fontWeight = "600";
+    tooltip.style.pointerEvents = "none";
+    tooltip.style.display = "none";
+    tooltip.style.maxWidth = "250px";
+    tooltip.style.zIndex = "9999";
+    tooltip.style.boxShadow = "0 2px 6px rgba(0,0,0,0.5)";
+    document.body.appendChild(tooltip);
+
     // let extrabig.country.sort(function(a, b){return b-a});
     // 2. Loop through the filtered results
     filtered.forEach((item) => {
@@ -73,7 +106,7 @@
       const r = 255 - (item.population / 10) * 8;
       const g = 255 - (item.population / 10) * 18;
       const gr = 255 - (item.population / 10) * 25;
-      let margreduce = (125 - item.population) * 1.5 + "px";
+      let margreduce = (125 - item.population) * 3.5 + "px";
       // console.log(margreduce);
 
       containerDiv.style.margin = "15px";
@@ -100,14 +133,20 @@
         containerDiv.style.backgroundColor = `rgb(${r - 70}, ${g - 70}, ${gr - 70})`;
         containerDiv.style.color = `rgb(${r + 500}, ${g + 500}, ${gr + 500})`;
         containerDiv.style.transform = "translateX(70px)";
-
       });
+      containerDiv.addEventListener("click", (e) => {
+        tooltip.textContent = item.growth;
+        tooltip.style.display = "block";
+        tooltip.style.left = e.clientX + 10 + "px";
+        tooltip.style.top = e.clientY - 30 + "px";
+      });
+
       containerDiv.addEventListener("mouseout", () => {
         containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
         containerDiv.style.transform = "translateX(0)";
         containerDiv.style.fontWeight = 'normal';
+        tooltip.style.display = "none";  // hide tooltip when mouse leaves bar
       });
-
       // Create the Paragraph (keeping it separate for just the name)
       const myPara = document.createElement("p");
       myPara.textContent = item.country + " - " + item.population + "M";
