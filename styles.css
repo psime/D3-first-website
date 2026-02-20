@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+ul {
+list-style-type: "\1F44D";
+}
+
+h1 {
+  font-size: 1.2rem;
+  text-align: center;
+  width: 500px;
+}
+
+div {
+  margin-left: 20px;
+ 
+}
+
+div p {
+  color: aliceblue
+}
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>My first D3 Website</title>
+  <p></p>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="chart"></div>
+  <h1 id="holder" style="text-align: center; width: 600px;">Countries by population</h1>
+  <br>
+  <!-- <form>
+    <label><b>Enter a Message</b></label>
+    <input type="text" name="message" id="user_input" />
+    <input type="submit" /><br />
+    <p><span id="display"></span></p>
+  </form> -->
+
+  <script>
+    // document
+    //   .getElementById("user_input")
+    //   .addEventListener("user_input", (event) => {
+    //     console.log(event.target.value); // Logs the value as the user types
+    //   });
+
+    const data = [
+      { country: "France", population: 67 },
+      { country: "Germany", population: 83 },
+      { country: "Spain", population: 47 },
+      { country: "UK", population: 72 },
+    ];
+
+
+    let gr = 50;
+    //     alert(gr);
+    // alert(gr);
+    // let gr = document.getElementById("user_input").text;
+
+    for (let i = 0; i < data.length; i++) {
+      const mydiv = document.createElement("p");
+      console.log(mydiv);
+      document.body.appendChild(mydiv);
+    }
+    // Filter large countries, then extract names
+    const largeCountryNames = data.filter((d) => {
+      return d.population > 30;
+    });
+    // .map((d) => {
+    //   return d.country + " - " + d.population + "M";
+    // });
+
+    console.log(largeCountryNames);
+
+    const extrabig = largeCountryNames
+      .filter((d) => d.population > 50)
+      .sort((a, b) => b.population - a.population)
+
+
+    // 1. Filter the data (e.g., population over 50)
+    const filtered = extrabig
+    // let extrabig.country.sort(function(a, b){return b-a});
+    // 2. Loop through the filtered results
+    filtered.forEach((item) => {
+      // Create the "Wrapper" Div
+      const containerDiv = document.createElement("div");
+
+      // --- DYNAMIC MARGIN ---
+      // We use the population value and multiply it to make the visual difference obvious
+      // Adjust the multiplier (e.g., * 2 or * 5) to see how it affects the "push"
+
+      // --- DYNAMIC COLORS ---
+      // You can use the population to change the brightness or color!
+      // Example: Higher population = Darker grey
+      const r = 255 - (item.population / 10) * 6;
+      const g = 255 - (item.population / 10) * 18;
+      let margreduce = (150 - item.population) * 3 + "px";
+
+      // console.log(margreduce);
+
+      containerDiv.style.margin = "15px";
+      containerDiv.style.marginLeft = "80px";
+      containerDiv.style.marginRight = margreduce;
+      containerDiv.style.padding = "5px";
+      containerDiv.style.paddingLeft = "20px";
+      // containerDiv.style.backgroundColor = "#f0f0f0";
+      containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
+      containerDiv.style.border = "2px solid #000";
+      containerDiv.addEventListener("mouseover", () => {
+        containerDiv.style.backgroundColor = `rgb(${r - 50}, ${g - 50}, ${gr - 50})`;
+      });
+      containerDiv.addEventListener("mouseout", () => {
+        containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
+      });
+
+      // Create the Paragraph (keeping it separate for just the name)
+      const myPara = document.createElement("p");
+      myPara.textContent = item.country + " - " + item.population + "M";
+
+      // NESTING
+      containerDiv.appendChild(myPara);
+
+      // ATTACHING
+      document.body.appendChild(containerDiv);
+    });
+    // const extrabig = largeCountryNames
+    //   .filter((d) => {
+    //     return d.population > 70;
+    //   })
+    //   .map((d) => {
+    //     return d.country;
+    //   });
+    // console.log(extrabig);
+    // let myvar = document.getelementbyid("holder").text;
+    console.log(extrabig);
+  </script>
+</body>
+
+</html>
