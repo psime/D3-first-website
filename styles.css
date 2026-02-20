@@ -8,6 +8,7 @@ body {
   font-smooth: always;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+background-color:#fae4cd;
 }
 
 ul {
@@ -22,7 +23,7 @@ h1 {
 
 div {
   margin-left: 20px;
- 
+
 }
 
 div p {
