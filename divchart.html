@@ -78,8 +78,8 @@
       // Example: Higher population = Darker grey
       const r = 255 - (item.population / 10) * 6;
       const g = 255 - (item.population / 10) * 18;
+      const gr = 255 - (item.population / 10) * 17;
       let margreduce = (150 - item.population) * 3 + "px";
-
       // console.log(margreduce);
 
       containerDiv.style.margin = "15px";
@@ -88,13 +88,26 @@
       containerDiv.style.padding = "5px";
       containerDiv.style.paddingLeft = "20px";
       // containerDiv.style.backgroundColor = "#f0f0f0";
-      containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
+      //    containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
       containerDiv.style.border = "2px solid #000";
+      // containerDiv.addEventListener("mouseover", () => {
+      //   containerDiv.style.backgroundColor = `rgb(${r - 50}, ${g - 50}, ${gr - 50})`;
+      // });
+      // containerDiv.addEventListener("mouseout", () => {
+      //   containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
+      // });
+
+      // Add transition for smooth movement
+
+      containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
+
       containerDiv.addEventListener("mouseover", () => {
         containerDiv.style.backgroundColor = `rgb(${r - 50}, ${g - 50}, ${gr - 50})`;
+        containerDiv.style.transform = "translateX(20px)";
       });
       containerDiv.addEventListener("mouseout", () => {
         containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
+        containerDiv.style.transform = "translateX(0)";
       });
 
       // Create the Paragraph (keeping it separate for just the name)
