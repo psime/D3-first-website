@@ -12,27 +12,21 @@
 
 <body>
   <div id="chart"></div>
-  <h1 id="holder" style="text-align: center; width: 600px;">Countries by population</h1>
+  <h1 id="holder" style="text-align: center; width: 750px;">Countries by population</h1>
   <br>
-  <!-- <form>
-    <label><b>Enter a Message</b></label>
-    <input type="text" name="message" id="user_input" />
-    <input type="submit" /><br />
-    <p><span id="display"></span></p>
-  </form> -->
-
   <script>
-    // document
-    //   .getElementById("user_input")
-    //   .addEventListener("user_input", (event) => {
-    //     console.log(event.target.value); // Logs the value as the user types
-    //   });
 
     const data = [
       { country: "France", population: 67 },
       { country: "Germany", population: 83 },
       { country: "Spain", population: 47 },
       { country: "UK", population: 69 },
+      { country: "Italy", population: 59 },
+      { country: "Poland", population: 38 },
+      { country: "Romania", population: 19 },
+      { country: "Netherlands", population: 17 },
+      { country: "Belgium", population: 11 },
+      { country: "Greece", population: 10 }
     ];
 
 
@@ -76,10 +70,10 @@
       // --- DYNAMIC COLORS ---
       // You can use the population to change the brightness or color!
       // Example: Higher population = Darker grey
-      const r = 255 - (item.population / 10) * 6;
+      const r = 255 - (item.population / 10) * 8;
       const g = 255 - (item.population / 10) * 18;
-      const gr = 255 - (item.population / 10) * 17;
-      let margreduce = (150 - item.population) * 3 + "px";
+      const gr = 255 - (item.population / 10) * 25;
+      let margreduce = (125 - item.population) * 1.5 + "px";
       // console.log(margreduce);
 
       containerDiv.style.margin = "15px";
@@ -89,7 +83,7 @@
       containerDiv.style.paddingLeft = "20px";
       // containerDiv.style.backgroundColor = "#f0f0f0";
       //    containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
-      containerDiv.style.border = "2px solid #000";
+      containerDiv.style.border = "3px solid #000";
       // containerDiv.addEventListener("mouseover", () => {
       //   containerDiv.style.backgroundColor = `rgb(${r - 50}, ${g - 50}, ${gr - 50})`;
       // });
@@ -98,16 +92,20 @@
       // });
 
       // Add transition for smooth movement
-
+      containerDiv.style.transition = "transform 1.2s ease, background-color 0.8s ease";
       containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
 
       containerDiv.addEventListener("mouseover", () => {
-        containerDiv.style.backgroundColor = `rgb(${r - 50}, ${g - 50}, ${gr - 50})`;
-        containerDiv.style.transform = "translateX(40px)";
+        containerDiv.style.fontWeight = 800;
+        containerDiv.style.backgroundColor = `rgb(${r - 70}, ${g - 70}, ${gr - 70})`;
+        containerDiv.style.color = `rgb(${r + 500}, ${g + 500}, ${gr + 500})`;
+        containerDiv.style.transform = "translateX(70px)";
+
       });
       containerDiv.addEventListener("mouseout", () => {
         containerDiv.style.backgroundColor = `rgb(${r}, ${g}, ${gr})`;
         containerDiv.style.transform = "translateX(0)";
+        containerDiv.style.fontWeight = 'normal';
       });
 
       // Create the Paragraph (keeping it separate for just the name)
